@@ -1,86 +1,49 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
-#define MAX 100
-
-int stack[MAX];
-int top = -1;
-
-bool isEmpty() {
-    return top == -1;
-}
-
-bool isFull() {
-    return top == MAX - 1;
-}
-
-void push(int data) {
-    if (isFull()) {
-        printf("overflow\n");
-        return;
-    }
+#include<stdio.h>
+int arr[100];
+int top=-1;
+void push(int x){
     top++;
-    stack[top] = data;
-}
-
-void pop() {
-    if (isEmpty()) {
-        printf("underflow\n");
-        return;
+    if(top==100){
+        printf("overflow\n");
+        top--;
     }
-    top--;
+    else{
+        arr[top]=x;
+            }
 }
-
-void peek() {
-    if (isEmpty()) {
+void peek(){
+    if(top==-1){
         printf("no ele\n");
-        return;
     }
-    printf("%d\n", stack[top]);
+    else{
+    printf("%d\n",arr[top]);
+        }
 }
-
-void display() {
-    if (isEmpty()) {
-        printf("stack empty\n");
-        return;
+void pop(){
+    if(top==-1){
+        printf("underflow\n");
     }
-    int i = top;
-    while (i >= 0) {
-        printf("%d ", stack[i]);
-        i--;
+    else{
+        printf("%d\n",arr[top]);
+        top--;
     }
-    printf("\n");
 }
-
-int main() {
-    int choice, value;
-    
-    while (1) {
-        printf("\n1. Push\n2. Pop\n3. Peek\n4. Display\n5. Exit\n");
-        printf("Enter choice: ");
-        scanf("%d", &choice);
-        
-        switch (choice) {
-            case 1:
-                printf("Enter value: ");
-                scanf("%d", &value);
-                push(value);
-                break;
-            case 2:
-                pop();
-                break;
-            case 3:
-                peek();
-                break;
-            case 4:
-                display();
-                break;
-            case 5:
-                exit(0);
-            default:
-                printf("Invalid choice\n");
+void display(){
+    if(top==-1){
+        printf("no ele\n");
+    }
+    else{
+        for(int i=top;i>=0;i--){
+            printf("%d\n",arr[i]);
         }
     }
-    return 0;
+}
+void main(){
+    push(5);
+    push(19);
+    push(34);
+    push(89);
+    pop();
+    display();
+    display();
 }
